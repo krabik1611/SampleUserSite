@@ -7,6 +7,10 @@ import { ResetForm } from "../component/ResetForm";
 export const Home = () => {
   const { user } = useContext(UserContext) as UserContextType;
   const [open, setOpen] = useState(false);
+
+
+
+
   return (
     <>
       <Modal

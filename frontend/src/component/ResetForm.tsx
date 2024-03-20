@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { api } from "../index";
-import { cleanup } from "@testing-library/react";
+import {useState} from "react";
+import {api} from "../index";
 
 interface IProps {
   onOk?: () => void;
@@ -18,10 +17,14 @@ export const ResetForm = (props: IProps) => {
     setPasswordConfirm("");
   };
 
+
+
+
   const resetPassword = () => {
     api
       .resetPassword(password)
-      .then((answ) => {
+      .then(() => {
+        cleanup()
         props.onOk && props.onOk();
       })
       .catch((err) => {

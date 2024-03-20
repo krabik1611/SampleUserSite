@@ -1,18 +1,16 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { InjectModel } from '@nestjs/sequelize';
 import { User } from './entities/user.entity';
 import { ResetPasswordDto } from './dto/resetPassword.dto';
 import * as bcrypt from 'bcryptjs';
-import { ConfigService } from '@nestjs/config';
+import { InjectModel } from '@nestjs/sequelize';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User)
     private userRepository: typeof User,
-    private configService: ConfigService,
   ) {}
   async create(createUserDto: CreateUserDto) {
     const user = await User.create({
@@ -20,6 +18,8 @@ export class UserService {
       password: await this.hashPassword(createUserDto.password),
     });
     await user.save();
+    delete user.dataValues.password;
+
     return user;
   }
 
@@ -50,7 +50,7 @@ export class UserService {
     const match = await this.matchPassword(body.password, existUser.password);
     if (match)
       throw new HttpException('Password already Set', HttpStatus.FORBIDDEN);
-
+    console.log(body.password);
     const hashPassword = await this.hashPassword(body.password);
     return await this.update(user.dataValues.id, {
       password: hashPassword,

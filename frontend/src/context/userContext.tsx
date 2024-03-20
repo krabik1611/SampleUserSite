@@ -1,5 +1,5 @@
-import React, { createContext, FC, useState } from "react";
-import { IUser, UserContextType } from "../types/user";
+import React, {createContext, FC} from "react";
+import {UserContextType} from "../types/user";
 
 // export const UserContext = createContext<UserContextType>({
 //   user: null,

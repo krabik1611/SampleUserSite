@@ -44,7 +44,8 @@ class HttpClient {
 
 export class Api extends HttpClient {
   constructor() {
-    super(`http://127.0.0.1:3005/`);
+    super(process.env.REACT_APP_BASEURL || `http://127.0.0.1:3005/`);
+    console.log(process.env.REACT_APP_BASEURL, "process.env.REACT_APP_BASEURL");
   }
 
   async getMe() {
@@ -57,5 +58,9 @@ export class Api extends HttpClient {
 
   async resetPassword(password: string) {
     return this.instance.patch("/user/reset", { password });
+  }
+
+  async register(payload: Pick<IUser, "username" | "password">) {
+    return this.instance.post("/user", payload);
   }
 }

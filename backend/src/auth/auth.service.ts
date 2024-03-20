@@ -1,7 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
-import { User } from '../user/entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +14,12 @@ export class AuthService {
       user.username,
       user.password,
     );
+    console.log('login', {
+      username: user.username,
+      password: user.password,
+    });
     if (!userValidation) throw new UnauthorizedException();
+
     const payload = {
       username: userValidation.dataValues.username,
       sub: userValidation.dataValues.id,

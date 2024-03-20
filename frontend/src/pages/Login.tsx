@@ -1,8 +1,6 @@
-import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
-import { UserContext } from "../context/userContext";
-import { UserContextType } from "../types/user";
-import { api } from "../index";
+import {Link} from "react-router-dom";
+import {useState} from "react";
+import {api} from "../index";
 
 export const Login = () => {
   const [username, setUsername] = useState<string>("");

@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { Login } from "./pages/Login";
-import { CreateAccount } from "./pages/CreateAccount";
-import { UserContext, UserProvider } from "./context/userContext";
-import { api } from "./index";
-import { IUser, UserContextType } from "./types/user";
-import { ProtectedLogin, ProtectedRoute } from "./component/privateRoute";
+import React, {useEffect, useState} from "react";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Home} from "./pages/Home";
+import {Login} from "./pages/Login";
+import {CreateAccount} from "./pages/CreateAccount";
+import {UserProvider} from "./context/userContext";
+import {api} from "./index";
+import {IUser} from "./types/user";
+import {ProtectedLogin, ProtectedRoute} from "./component/privateRoute";
 
 function App() {
   const [user, setUser] = useState<IUser | null>(null);

@@ -1,9 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-require('dotenv').config();
 import { ValidationPipe } from '@nestjs/common';
+
+require('dotenv').config();
+
 async function bootstrap() {
-  console.log(process.env.SECRET);
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(
     new ValidationPipe({
@@ -16,6 +17,7 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
+  app.setGlobalPrefix('api');
   await app.listen(3005);
 }
 bootstrap();

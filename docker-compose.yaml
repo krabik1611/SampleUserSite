@@ -1,0 +1,34 @@
+services:
+  backend:
+    image:  krabby1611/sample_user_backend:5
+    container_name: backend
+    ports:
+      - '5505:3005'
+    environment:
+      - DEFAULT_USERNAME:admin
+      - DEFAULT_PASSWORD:admin
+      - JWT_SECRET_KEY:test
+    networks:
+      sample_network:
+        ipv4_address: 10.4.0.2
+  frontend:
+#    image: krabby1611/sample_user_frontend:4
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - '3030:3000'
+    networks:
+      sample_network:
+        ipv4_address: 10.4.0.3
+
+    depends_on:
+      - backend
+networks:
+  sample_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.4.0.0/16
+          gateway: 10.4.0.1

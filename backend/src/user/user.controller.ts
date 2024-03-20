@@ -1,12 +1,11 @@
 import {
+  Body,
   Controller,
   Get,
-  Post,
-  Body,
-  Patch,
   Param,
+  Patch,
+  Post,
   Request,
-  Req,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -14,15 +13,16 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ResetPasswordDto } from './dto/resetPassword.dto';
 import { CurrentUser } from '../auth/decorators/currentUser.decorator';
 import { User } from './entities/user.entity';
+import { Public } from '../auth/guard/auth.guard';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Public()
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
     const user = await this.userService.create(createUserDto);
-    console.log(user);
     return user;
   }
 

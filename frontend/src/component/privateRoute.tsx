@@ -1,6 +1,6 @@
-import { Navigate } from "react-router-dom";
-import { IUser } from "../types/user";
-import React, { useEffect, useState } from "react";
+import {Navigate} from "react-router-dom";
+import {IUser} from "../types/user";
+import React from "react";
 
 export const ProtectedRoute = ({
   user,
